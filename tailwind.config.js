@@ -3,7 +3,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        modalOverlay: "rgba(23, 15, 52, 0.8)",
+      },
+      maxWidth: {
+        modal: "42rem",
+      },
+    },
   },
   plugins: [],
 }
