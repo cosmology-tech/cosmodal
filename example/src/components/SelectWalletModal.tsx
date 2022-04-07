@@ -2,17 +2,18 @@ import { FunctionComponent } from "react";
 import { BaseModal, BaseModalProps } from "./BaseModal";
 
 export interface Wallet {
+  id: string;
   name: string;
   description: string;
   logoImgUrl: string;
-  handleSelect: () => void;
 }
 
 export const SelectWalletModal: FunctionComponent<
   BaseModalProps & {
     wallets: Wallet[];
+    selectWallet: (walletId: string) => void;
   }
-> = ({ isOpen, onRequestClose, wallets }) => {
+> = ({ isOpen, onRequestClose, wallets, selectWallet }) => {
   return (
     <BaseModal
       isOpen={isOpen}
@@ -25,7 +26,7 @@ export const SelectWalletModal: FunctionComponent<
             className="bg-background rounded-2xl p-5 flex items-center bg-gray-200 dark:bg-gray-800 ring-1 ring-gray-400 hover:ring-gray-600 dark:ring-gray-600 dark:hover:ring-gray-400"
             onClick={(e) => {
               e.preventDefault();
-              wallet.handleSelect();
+              selectWallet(wallet.id);
             }}
           >
             <img

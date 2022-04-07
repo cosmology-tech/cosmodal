@@ -2,71 +2,68 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "./index";
 import { WalletStatus } from "@keplr-wallet/stores";
-import { useKeplr } from "../providers/wc-keplr";
+import { useWallet, WalletInfo } from "../providers/wc-keplr";
 import { KeplrWalletConnectV1 } from "../providers/wc-client";
 
-/** Manages the initialization of the Osmosis account. */
-export const AccountInitManagement: FunctionComponent = observer(
-  ({ children }) => {
-    const { chainStore, accountStore } = useStore();
+export const AccountInitManagement: FunctionComponent<{
+  walletInfoList: WalletInfo[];
+}> = observer(({ walletInfoList, children }) => {
+  const { chainStore, accountStore } = useStore();
 
-    const keplr = useKeplr();
+  const wallet = useWallet();
 
-    const chainInfo = chainStore.chainInfos[0];
-    const account = accountStore.getAccount(chainInfo.chainId);
+  const chainInfo = chainStore.chainInfos[0];
+  const account = accountStore.getAccount(chainInfo.chainId);
 
-    const [accountHasInit, setAccountHasInit] = useState(false);
+  const [accountHasInit, setAccountHasInit] = useState(false);
 
-    useEffect(() => {
-      if (typeof localStorage !== "undefined") {
-        const value = localStorage.getItem("account_auto_connect");
-        if (value) {
-          if (value === "wallet-connect") {
-            keplr.setDefaultConnectionType("wallet-connect");
-          } else {
-            keplr.setDefaultConnectionType("extension");
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const value = localStorage.getItem("account_auto_connect");
+      if (value) {
+        walletInfoList.some((walletInfo) => {
+          if (walletInfo.id === value) {
+            wallet.setDefaultConnectionType(walletInfo.id);
+            return true;
           }
-          account.init();
-        }
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
-      if (account.walletStatus === WalletStatus.Loaded) {
-        setAccountHasInit(true);
-        if (typeof localStorage !== "undefined") {
-          const value =
-            keplr.connectionType === "wallet-connect"
-              ? "wallet-connect"
-              : "extension";
-          localStorage.setItem("account_auto_connect", value);
-        }
-      }
-
-      if (accountHasInit && account.walletStatus === WalletStatus.NotInit) {
-        setAccountHasInit(false);
-        if (typeof localStorage !== "undefined") {
-          localStorage.removeItem("account_auto_connect");
-        }
-        keplr.getKeplr().then((keplrAPI) => {
-          if (keplrAPI && keplrAPI instanceof KeplrWalletConnectV1) {
-            keplrAPI.connector.killSession();
-          }
-
-          keplr.clearLastUsedKeplr();
-          keplr.setDefaultConnectionType(undefined);
+          return false;
         });
+        account.init();
       }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-      if (
-        account.walletStatus === WalletStatus.Rejected ||
-        account.walletStatus === WalletStatus.NotExist
-      ) {
-        account.disconnect();
+  useEffect(() => {
+    if (account.walletStatus === WalletStatus.Loaded) {
+      setAccountHasInit(true);
+      if (typeof localStorage !== "undefined" && wallet.connectionType) {
+        localStorage.setItem("account_auto_connect", wallet.connectionType);
       }
-    }, [account, account.walletStatus, accountHasInit, keplr]);
+    }
 
-    return <React.Fragment>{children}</React.Fragment>;
-  }
-);
+    if (accountHasInit && account.walletStatus === WalletStatus.NotInit) {
+      setAccountHasInit(false);
+      if (typeof localStorage !== "undefined") {
+        localStorage.removeItem("account_auto_connect");
+      }
+      wallet.getWallet().then((keplrAPI) => {
+        if (keplrAPI && keplrAPI instanceof KeplrWalletConnectV1) {
+          keplrAPI.connector.killSession();
+        }
+
+        wallet.clearLastUsedWallet();
+        wallet.setDefaultConnectionType(undefined);
+      });
+    }
+
+    if (
+      account.walletStatus === WalletStatus.Rejected ||
+      account.walletStatus === WalletStatus.NotExist
+    ) {
+      account.disconnect();
+    }
+  }, [account, account.walletStatus, accountHasInit, wallet]);
+
+  return <React.Fragment>{children}</React.Fragment>;
+});

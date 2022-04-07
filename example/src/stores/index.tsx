@@ -1,21 +1,17 @@
 import React, { FunctionComponent, useState } from "react";
 
 import { RootStore } from "./root";
-import { useKeplr } from "../providers/wc-keplr";
-import { AccountInitManagement } from "./account-init-management";
+import { useWallet } from "../providers/wc-keplr";
 
 const StoreContext = React.createContext<RootStore | null>(null);
 
 export const StoreProvider: FunctionComponent = ({ children }) => {
-  const keplr = useKeplr();
+  const wallet = useWallet();
 
-  const [rootStore] = useState(() => new RootStore(keplr.getKeplr));
+  const [rootStore] = useState(() => new RootStore(wallet.getWallet));
 
   return (
-    <StoreContext.Provider value={rootStore}>
-      <AccountInitManagement />
-      {children}
-    </StoreContext.Provider>
+    <StoreContext.Provider value={rootStore}>{children}</StoreContext.Provider>
   );
 };
 
