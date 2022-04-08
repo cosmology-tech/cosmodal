@@ -4,14 +4,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BroadcastMode } from "secretjs";
 import App from "./App";
-import { KeplrWalletConnectV1 } from "./providers/wc-client";
-import { GetWalletProvider, WalletInfo } from "./providers/wc-keplr";
+import { KeplrWalletConnectV1, GetWalletProvider, WalletInfo } from "cosmodal";
 import { StoreProvider } from "./stores";
 import Axios from "axios";
 import { EmbedChainInfos } from "./config";
 
 import "./styles/index.css";
 import { AccountInitManagement } from "./stores/account-init-management";
+import WalletConnect from "@walletconnect/client";
 
 export async function sendTxWC(
   chainId: string,
@@ -73,7 +73,7 @@ const walletInfoList: WalletInfo[] = [
     name: "WalletConnect",
     description: "Keplr Mobile",
     logoImgUrl: "/wallet-connect-logo.png",
-    getWallet: (connector) =>
+    getWallet: (connector: WalletConnect) =>
       Promise.resolve(
         connector
           ? new KeplrWalletConnectV1(connector, {

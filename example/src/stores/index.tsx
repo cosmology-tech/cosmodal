@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
 
 import { RootStore } from "./root";
-import { useWallet } from "../providers/wc-keplr";
+import { useWallet } from "cosmodal";
 
 const StoreContext = React.createContext<RootStore | null>(null);
 

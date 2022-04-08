@@ -2,8 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "./index";
 import { WalletStatus } from "@keplr-wallet/stores";
-import { useWallet, WalletInfo } from "../providers/wc-keplr";
-import { KeplrWalletConnectV1 } from "../providers/wc-client";
+import { useWallet, WalletInfo, KeplrWalletConnectV1 } from "cosmodal";
 
 export const AccountInitManagement: FunctionComponent<{
   walletInfoList: WalletInfo[];
@@ -47,9 +46,9 @@ export const AccountInitManagement: FunctionComponent<{
       if (typeof localStorage !== "undefined") {
         localStorage.removeItem("account_auto_connect");
       }
-      wallet.getWallet().then((keplrAPI) => {
-        if (keplrAPI && keplrAPI instanceof KeplrWalletConnectV1) {
-          keplrAPI.connector.killSession();
+      wallet.getWallet().then((wallet: any) => {
+        if (wallet && wallet instanceof KeplrWalletConnectV1) {
+          wallet.connector.killSession();
         }
 
         wallet.clearLastUsedWallet();

@@ -9,7 +9,7 @@ import {
 import { ChainInfo, Keplr } from "@keplr-wallet/types";
 import EventEmitter from "eventemitter3";
 import { EmbedChainInfos } from "../config";
-import { KeplrWalletConnectV1 } from "../providers/wc-client";
+import { KeplrWalletConnectV1 } from "cosmodal";
 
 export class RootStore {
   public readonly chainStore: ChainStore<ChainInfo>;

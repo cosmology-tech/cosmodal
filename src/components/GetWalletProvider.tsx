@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { SelectWalletModal, WalletConnectQRCodeModal } from "../components";
+import { SelectWalletModal, WalletConnectQRCodeModal } from ".";
 
 export interface WalletInfo {
   id: string;
