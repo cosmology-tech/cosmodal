@@ -1,23 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es5",
     "outDir": "dist",
     "rootDir": "src",
     "baseUrl": ".",
     "module": "commonjs",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "target": "es5",
+    "lib": ["es7", "dom"],
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
+    "importHelpers": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "preserveSymlinks": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true
   },
-  "include": ["./src/**/*", "craco.config.ts"]
+  "include": ["./src/**/*"]
 }
