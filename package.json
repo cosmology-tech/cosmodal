@@ -1,7 +1,6 @@
 {
-  "name": "cosmodal",
+  "name": "@chainapsis/cosmodal",
   "version": "0.1.0",
-  "private": true,
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/index.js",
@@ -12,8 +11,7 @@
   ],
   "scripts": {
     "build": "webpack",
-    "clean": "rm -rf dist; rm -rf node_modules",
-    "bootstrap": "yarn clean && yarn install && yarn build && cd wow && yarn clean && yarn install && yarn dev"
+    "clean": "rm -rf dist; rm -rf node_modules"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -60,5 +58,16 @@
     "typescript": "^4.4.2",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.2"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chainapsis/cosmodal.git"
+  },
+  "author": "chainapsis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chainapsis/cosmodal/issues"
+  },
+  "homepage": "https://github.com/chainapsis/cosmodal#readme"
 }
