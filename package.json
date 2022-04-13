@@ -1,6 +1,6 @@
 {
   "name": "@chainapsis/cosmodal",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/index.js",
@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "webpack",
-    "clean": "rm -rf dist; rm -rf node_modules"
+    "clean": "rm -rf dist",
+    "prepublish": "yarn clean && yarn build"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -29,8 +30,6 @@
     "classnames": "^2.3.1",
     "mobx-react-lite": "^3.3.0",
     "qrcode.react": "^3.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "react-modal": "^3.14.4",
     "secretjs": "^0.17.5",
     "tailwindcss": "^3.0.2"
@@ -44,8 +43,8 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/register": "^7.17.7",
     "@types/node": "^16.7.13",
-    "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
     "@types/react-modal": "^3.13.1",
     "autoprefixer": "^10.4.4",
     "buffer": "^6.0.3",
@@ -53,13 +52,18 @@
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.12",
     "process": "^0.11.10",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "stream-browserify": "^3.0.0",
     "ts-loader": "^9.2.8",
     "typescript": "^4.4.2",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.2"
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "peerDependencies": {
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chainapsis/cosmodal.git"
