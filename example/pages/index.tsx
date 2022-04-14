@@ -1,44 +1,62 @@
-import { WalletStatus } from "@keplr-wallet/stores";
-import { observer } from "mobx-react-lite";
+import { Keplr } from "@keplr-wallet/types";
+import { KeplrWalletConnectV1, useWalletManager } from "cosmodal";
 import type { NextPage } from "next";
-import { useStore } from "../stores";
+import { useEffect, useState } from "react";
+import { EmbedChainInfos } from "../config";
+
+const AUTO_CONNECT_WALLET_KEY = "auto_connect_wallet";
 
 const Home: NextPage = () => {
-  const { chainStore, accountStore } = useStore();
-  const account = accountStore.getAccount(chainStore.chainInfos[0].chainId);
+  const [address, setAddress] = useState("");
+  const {
+    getWallet,
+    clearLastUsedWallet,
+    connectionType,
+    setDefaultConnectionType,
+  } = useWalletManager();
+  const currentChainId = EmbedChainInfos[0].chainId;
+
+  const connectWallet = async () => {
+    const wallet: Keplr | KeplrWalletConnectV1 = await getWallet();
+    await wallet.enable([currentChainId]);
+    const key = await wallet.getKey(currentChainId);
+    setAddress(key.bech32Address);
+  };
+
+  const signOut = () => {
+    setAddress("");
+    clearLastUsedWallet();
+    setDefaultConnectionType(undefined);
+    localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
+    // For removing cached WalletConnect info
+    localStorage.removeItem("walletconnect");
+  };
+
+  useEffect(() => {
+    if (connectionType) {
+      localStorage.setItem(AUTO_CONNECT_WALLET_KEY, connectionType);
+    }
+  }, [connectionType]);
+
+  useEffect(() => {
+    const autoConnectionType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
+    if (autoConnectionType) {
+      setDefaultConnectionType(autoConnectionType);
+      connectWallet();
+    }
+  }, []);
 
   return (
-    <div>
-      {account.walletStatus === WalletStatus.Loaded ? (
-        <div>
-          {account.bech32Address}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              account.disconnect();
-            }}
-            className="bg-transparent border border-opacity-30 border-secondary-200 h-9 w-full rounded-md py-2 px-1 flex items-center justify-center mb-8"
-          >
-            <p className="text-sm max-w-24 ml-3 text-secondary-200 font-semibold overflow-x-hidden truncate transition-all">
-              Sign Out
-            </p>
-          </button>
-        </div>
-      ) : (
-        <button
-          className="flex items-center justify-center w-full h-9 py-3.5 rounded-md bg-primary-200 mb-8"
-          onClick={(e) => {
-            e.preventDefault();
-            account.init();
-          }}
-        >
-          <span className="ml-2.5 text-white-high font-semibold">
-            Connect Wallet
-          </span>
-        </button>
-      )}
+    <div className="flex items-center">
+      {address}
+      <button
+        onClick={(e) => (address ? signOut() : connectWallet())}
+        className="border border-black rounded-md py-2 px-4 flex items-center justify-center"
+      >
+        {address ? "Sign Out" : "Connect Wallet"}
+      </button>
     </div>
   );
 };
 
-export default observer(Home);
+export default Home;

@@ -1,6 +1,7 @@
 {
   "name": "example",
-  "private": true,
+  "author": "chainapsis",
+  "license": "ISC",
   "scripts": {
     "clean": "rm -rf node_modules .next dist",
     "dev": "next dev",
@@ -10,16 +11,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chainapsis/cosmodal": "file:..",
-    "axios": "^0.26.1",
-    "next": "12.1.4",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "cosmodal": "file:..",
+    "next": "12.1.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.4",
     "eslint": "8.13.0",
     "eslint-config-next": "12.1.4",

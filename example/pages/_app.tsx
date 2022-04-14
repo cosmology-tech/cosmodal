@@ -1,14 +1,13 @@
+import { getKeplrFromWindow } from "@keplr-wallet/stores";
+import WalletConnect from "@walletconnect/client";
 import {
   KeplrWalletConnectV1,
   WalletInfo,
-  WalletProvider,
-} from "@chainapsis/cosmodal";
-import { getKeplrFromWindow } from "@keplr-wallet/stores";
-import WalletConnect from "@walletconnect/client";
+  WalletManagerProvider,
+} from "cosmodal";
 import type { AppProps } from "next/app";
 import React from "react";
 import { EmbedChainInfos } from "../config";
-import { StoreProvider } from "../stores";
 import "../styles/globals.css";
 
 const walletInfoList: WalletInfo[] = [
@@ -35,11 +34,9 @@ const walletInfoList: WalletInfo[] = [
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WalletProvider walletInfoList={walletInfoList}>
-      <StoreProvider>
-        <Component {...pageProps} />
-      </StoreProvider>
-    </WalletProvider>
+    <WalletManagerProvider walletInfoList={walletInfoList}>
+      <Component {...pageProps} />
+    </WalletManagerProvider>
   );
 }
 

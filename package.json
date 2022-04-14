@@ -1,6 +1,6 @@
 {
-  "name": "@chainapsis/cosmodal",
-  "version": "0.2.0",
+  "name": "cosmodal",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chainapsis/cosmodal.git"
@@ -20,12 +20,11 @@
     "/dist"
   ],
   "scripts": {
+    "clean": "rm -rf node_modules dist",
     "build": "webpack",
-    "clean": "rm -rf dist",
-    "bootstrap": "yarn build && cd example && yarn bootstrap"
+    "start": "yarn build && cd example && yarn bootstrap"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
     "@cosmjs/launchpad": "^0.27.1",
     "@cosmjs/proto-signing": "^0.28.0",
     "@keplr-wallet/common": "^0.9.10",
@@ -33,17 +32,13 @@
     "@keplr-wallet/provider": "^0.9.12",
     "@keplr-wallet/stores": "^0.9.18",
     "@keplr-wallet/types": "^0.9.12",
-    "@svgr/webpack": "^5.5.0",
     "@walletconnect/client": "^1.7.7",
     "@walletconnect/types": "^1.7.7",
     "@walletconnect/utils": "^1.7.7",
-    "classnames": "^2.3.1",
-    "mobx-react-lite": "^3.3.0",
     "qrcode.react": "^3.0.0",
     "react-modal": "^3.14.4",
     "secretjs": "^0.17.5",
-    "styled-components": "^5.3.5",
-    "tailwindcss": "^3.0.2"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -72,7 +67,7 @@
     "webpack-cli": "^4.9.2"
   },
   "peerDependencies": {
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
