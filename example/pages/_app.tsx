@@ -7,7 +7,6 @@ import {
 } from "cosmodal";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import React from "react";
 import { EmbedChainInfos } from "../config";
 import "../styles/globals.css";
 

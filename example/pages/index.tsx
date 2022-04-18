@@ -47,12 +47,14 @@ const Home: NextPage = () => {
     localStorage.removeItem("walletconnect");
   };
 
+  // Store connected wallet type
   useEffect(() => {
     if (connectionType) {
       localStorage.setItem(AUTO_CONNECT_WALLET_KEY, connectionType);
     }
   }, [connectionType]);
 
+  // Automatically connect wallet as stored type, even if page refreshed,
   useEffect(() => {
     const autoConnectionType = localStorage.getItem(AUTO_CONNECT_WALLET_KEY);
     if (autoConnectionType) {
