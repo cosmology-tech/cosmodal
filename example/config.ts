@@ -3,8 +3,8 @@ import { ChainInfo } from "@keplr-wallet/types";
 
 export const EmbedChainInfos: ChainInfo[] = [
   {
-    rpc: "https://rpc-cosmoshub.keplr.app",
-    rest: "https://lcd-cosmoshub.keplr.app",
+    rpc: "https://rpc-cosmoshub.blockapsis.com",
+    rest: "https://lcd-cosmoshub.blockapsis.com",
     chainId: "cosmoshub-4",
     chainName: "Cosmos Hub",
     stakeCurrency: {
