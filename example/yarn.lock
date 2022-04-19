@@ -1980,12 +1980,13 @@ cosmjs-types@^0.4.0:
     long "^4.0.0"
     protobufjs "~6.11.2"
 
-"cosmodal@file:..":
-  version "0.3.0"
+cosmodal@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/cosmodal/-/cosmodal-0.3.1.tgz#f5d8cd6be3eb1e759e10928c28588a8d9620d554"
+  integrity sha512-QBSj+61CS3xyvXguHAPFCC3p1vxCX3gq9xSycwt1S/2s0ZHvxR0W3ncSKrKcQQd5a66S8yKW5DNg91sXXCTOJA==
   dependencies:
     "@cosmjs/launchpad" "^0.27.1"
     "@cosmjs/proto-signing" "^0.28.0"
-    "@cosmjs/stargate" "^0.28.4"
     "@keplr-wallet/common" "^0.9.10"
     "@keplr-wallet/cosmos" "^0.9.16"
     "@keplr-wallet/provider" "^0.9.12"
