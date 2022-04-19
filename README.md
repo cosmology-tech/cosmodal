@@ -2,6 +2,12 @@
 
 Connecting web applications to the Cosmos ecosystem.
 
+## Preview
+
+You can test the library on https://cosmodal.vercel.app/
+
+![preview](./preview.png)
+
 ## Running example locally
 
 ```
