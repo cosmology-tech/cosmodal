@@ -1,3 +1,26 @@
+
+# Cosmodal is now CosmosKit
+
+CosmosKit: A wallet connector for the Cosmos ⚛️
+
+https://github.com/cosmology-tech/cosmos-kit
+
+Cosmos Kit is a wallet adapter for developers to build apps that quickly and easily interact with Cosmos blockchains and wallets.
+
+# use Create Cosmos App to get started with CosmosKit
+
+Create Cosmos App: Set up a modern Cosmos app by running one command ⚛️
+
+https://github.com/cosmology-tech/create-cosmos-app
+
+Everything is preconfigured, ready-to-go, so you can focus on your code!
+
+* ⚡️ Connect easily to keplr + keplr mobile via wallet connect 
+* ⚛️ Sign and broadcast with [cosmjs](https://github.com/cosmos/cosmjs) stargate + cosmwasm signers
+* 🛠 Render pages with [next.js](https://nextjs.org/) hybrid static & server rendering
+* 🎨 Build awesome UI with [Cosmos Kit](https://github.com/cosmology-tech/cosmos-kit) and [Chakra UI](https://chakra-ui.com/docs/components)
+* 📝 Leverage [chain-registry](https://github.com/cosmology-tech/chain-registry) for Chain and Asset info for all Cosmos chains
+
 # Cosmodal
 
 Connecting web applications to the Cosmos ecosystem.
